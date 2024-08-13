@@ -1,0 +1,31 @@
+.move_button {
+  background-color: transparent;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  color: #17a2b8;
+  border: 1px solid #17a2b8;
+}
+
+.move_button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #17a2b8;
+}
+
+.delete_button {
+  background-color: transparent;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  color: red;
+  border: 1px solid red;
+}
+
+.delete_button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: red;
+}
