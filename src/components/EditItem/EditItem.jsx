@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
-export default function EditItem({ task, index, onToggleEdit, updateTask }) {
+export default function EditItem({ task, onToggleEdit, updateTask }) {
   const [updatedTask, setUpdatedTask] = useState(task);
 
   function handleInputChange(event) {
@@ -19,8 +19,8 @@ export default function EditItem({ task, index, onToggleEdit, updateTask }) {
   }
 
   function handleEditClick() {
-    updateTask(index, updatedTask);
-    onToggleEdit(index);
+    updateTask(task.id, updatedTask);
+    onToggleEdit(task.id);
   }
 
   return (

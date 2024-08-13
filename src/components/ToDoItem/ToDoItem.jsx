@@ -21,6 +21,7 @@ export default function ToDoItem({
   moveTaskDown,
   moveTaskUp,
   onToggleEdit,
+  filtering,
 }) {
   const itemStyle = classNames({
     [styles.completed]: task.completed, // added if task.completed === true
@@ -37,16 +38,20 @@ export default function ToDoItem({
           icon={faTrash}
           index={index}
         />
-        <ManageButton
-          typeButton={"move_button"}
-          onClickButton={moveTaskUp}
-          icon={faAngleUp}
-        />
-        <ManageButton
-          typeButton={"move_button"}
-          onClickButton={moveTaskDown}
-          icon={faAngleDown}
-        />
+        {!filtering && (
+          <ManageButton
+            typeButton={"move_button"}
+            onClickButton={moveTaskUp}
+            icon={faAngleUp}
+          />
+        )}
+        {!filtering && (
+          <ManageButton
+            typeButton={"move_button"}
+            onClickButton={moveTaskDown}
+            icon={faAngleDown}
+          />
+        )}
         <ManageButton
           typeButton={"important_button"}
           onClickButton={onToggleImportant}

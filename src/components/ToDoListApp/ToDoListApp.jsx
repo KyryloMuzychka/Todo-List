@@ -3,74 +3,89 @@ import { todo_list } from "./ToDoListApp.module.css";
 import Header from "../Header/Header";
 import AddItem from "../AddItem/AddItem";
 import ListItems from "../ListItems/ListItems";
+import SearchPanel from "../SearchPanel/SearchPanel";
 
 export default function ToDoListApp() {
   const [tasks, setTasks] = useState([
-    { title: "1", completed: true, important: true, editing: false },
-    { title: "2", completed: false, important: true, editing: false },
-    { title: "3", completed: true, important: false, editing: false },
-    { title: "4", completed: false, important: false, editing: false },
+    { id: 1, title: "1", completed: true, important: true, editing: false },
+    { id: 2, title: "2", completed: false, important: true, editing: false },
+    { id: 3, title: "3", completed: true, important: false, editing: false },
+    { id: 4, title: "4", completed: false, important: false, editing: false },
   ]);
+  const [filterTasks, setFilterTasks] = useState([]);
+  const [filtering, setFiltering] = useState(false);
 
   function addTask(newTask) {
+    const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);    
+    const newId = maxId + 1;    
+    const newTaskWithId = { ...newTask, id: newId };
+
     if (newTask.title.trim() !== "") {
       const index = tasks.findIndex((task) => task.title === newTask.title);
       if (index === -1) {
-        setTasks((prevTasks) => [...prevTasks, newTask]);
+        setTasks((prevTasks) => [...prevTasks, newTaskWithId]);
       }
     }
   }
 
-  function toggleProperty(tasksArray, position, key) {
-    const oldTask = tasksArray[position];
-    const value = !oldTask[key];
-
-    const updatedTask = { ...tasksArray[position], [key]: value };
-
-    return [
-      ...tasksArray.slice(0, position),
-      updatedTask,
-      ...tasksArray.slice(position + 1),
-    ];
+  function toggleProperty(tasksArray, id, key) {
+    return tasksArray.map(task => 
+      task.id === id ? {...task, [key]: !task[key]} : task
+    )    
   }
 
-  function onToggleCompleted(index) {
+  function onToggleCompleted(id) {
     setTasks((tasks) => {
-      return toggleProperty(tasks, index, "completed");
+      return toggleProperty(tasks, id, "completed");
     });
   }
 
-  function onToggleImportant(index) {
+  function onToggleImportant(id) {
     setTasks((tasks) => {
-      return toggleProperty(tasks, index, "important");
+      return toggleProperty(tasks, id, "important");
     });
   }
 
-  function onToggleEdit(index) {
+  function onToggleEdit(id) {
     setTasks((tasks) => {
-      return toggleProperty(tasks, index, "editing");
+      return toggleProperty(tasks, id, "editing");
     });
   }
 
   function getCompletedAmount() {
-    return Object.values(tasks).reduce((a, task) => a + task.completed, 0);
+    return tasks.filter(task => task.completed).length;
+  }
+
+  function searchTasks(searchTitle) {    
+    if (searchTitle.trim() !== "") {
+      const filteredTasks = tasks.filter((task) =>
+        task.title.toLowerCase().includes(searchTitle.toLowerCase())
+      );
+      setFilterTasks(filteredTasks);
+    } else {
+      setFilterTasks(tasks);
+    }
   }
 
   useEffect(() => {
     getCompletedAmount;
+    searchTasks;
   }, [tasks]);
 
   return (
     <div className={todo_list}>
       <Header doneTasks={getCompletedAmount()} allTasks={tasks.length} />
-      <AddItem addTask={addTask} />
+      <AddItem tasks={tasks} addTask={addTask} />
       <ListItems
         tasks={tasks}
         setTasks={setTasks}
+        filterTasks={filterTasks}
         onToggleCompleted={onToggleCompleted}
         onToggleImportant={onToggleImportant}
         onToggleEdit={onToggleEdit}
+        filtering={filtering}
       />
+      <SearchPanel searchTasks={searchTasks} tasks={tasks} setFiltering={setFiltering}/>
     </div>
   );
 }

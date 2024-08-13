@@ -8,18 +8,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function AddItem({ addTask }) {
-  const defaultTask = { title: "", completed: false };
+export default function AddItem({ tasks, addTask }) {
+  const defaultTask = { title: "", completed: false, important: false, editing: false };
   const [newTask, setNewTask] = useState(defaultTask);
 
-  function handleInputChange(event) {
+  function handleInputChange(event) {    
     setNewTask((prevState) => ({
       ...prevState,
       title: event.target.value,
     }));
   }
 
-  function handleAddClick() {
+  function handleAddClick() {    
     addTask(newTask);
     setNewTask(defaultTask);
   }

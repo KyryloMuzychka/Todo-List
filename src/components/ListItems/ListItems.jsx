@@ -6,12 +6,14 @@ import EditItem from "../EditItem/EditItem";
 export default function ListItems({
   tasks,
   setTasks,
+  filterTasks,
   onToggleCompleted,
   onToggleImportant,
   onToggleEdit,
+  filtering,
 }) {
-  function deleteTask(index) {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
+  function deleteTask(id) {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
   }
 
@@ -37,28 +39,39 @@ export default function ListItems({
     }
   }
 
-  function updateTask(index, updatedTask) {
-    const updatedTasks = [...tasks];
-    if (updatedTask.title.trim() !== "") {
-      const position = updatedTasks.findIndex(
-        (task) => task.title === updatedTask.title
-      );
-      if (position === -1) {
-        updatedTasks[index] = updatedTask;
-        setTasks(updatedTasks);
-      }
+  function updateTask(id, updatedTask) {
+    if (updatedTask.title.trim() === "") {
+      return;
     }
+
+    const isTitleUnique = !tasks.some(
+      (task) => task.id !== id && task.title === updatedTask.title
+    );
+
+    if (!isTitleUnique) {
+      return;
+    }
+
+    const updatedTasks = tasks.map((task) => {
+      return task.id === id
+        ? {
+            ...task,
+            title: updatedTask.title,
+          }
+        : task;
+    });
+
+    setTasks(updatedTasks);
   }
 
   return (
     <ol>
-      {tasks.map((task, index) => (
+      {filterTasks.map((task, index) => (
         <li key={index}>
           {task.editing && (
             <EditItem
               task={task}
-              index={index}
-              onToggleEdit={() => onToggleEdit(index)}
+              onToggleEdit={() => onToggleEdit(task.id)}
               updateTask={updateTask}
             />
           )}
@@ -66,14 +79,15 @@ export default function ListItems({
             <ToDoItem
               tasks={tasks}
               task={task}
-              deleteTask={() => deleteTask(index)}
-              onToggleCompleted={() => onToggleCompleted(index)}
-              onToggleImportant={() => onToggleImportant(index)}
+              deleteTask={() => deleteTask(task.id)}
+              onToggleCompleted={() => onToggleCompleted(task.id)}
+              onToggleImportant={() => onToggleImportant(task.id)}
               moveTaskDown={() => {
                 moveTaskDown(index);
               }}
               moveTaskUp={() => moveTaskUp(index)}
-              onToggleEdit={() => onToggleEdit(index)}
+              onToggleEdit={() => onToggleEdit(task.id)}
+              filtering={filtering}
             />
           )}
         </li>
