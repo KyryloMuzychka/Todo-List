@@ -1,0 +1,13 @@
+.todo_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.header_status {
+  color: rgb(126, 126, 126);
+}
+
+.icon {
+  margin-right: 7px;
+}
