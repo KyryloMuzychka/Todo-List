@@ -1,0 +1,22 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #9d9d9d;
+}
+
+.management {
+  display: flex;
+  gap: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.important {
+  color: rgb(118, 6, 6);
+  font-weight: 900;
+}
