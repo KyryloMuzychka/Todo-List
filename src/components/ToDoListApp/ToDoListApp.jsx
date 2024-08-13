@@ -6,10 +6,10 @@ import ListItems from "../ListItems/ListItems";
 
 export default function ToDoListApp() {
   const [tasks, setTasks] = useState([
-    { title: "1", completed: true, important: true },
-    { title: "2", completed: false, important: true },
-    { title: "3", completed: true, important: false },
-    { title: "4", completed: false, important: false },
+    { title: "1", completed: true, important: true, editing: false },
+    { title: "2", completed: false, important: true, editing: false },
+    { title: "3", completed: true, important: false, editing: false },
+    { title: "4", completed: false, important: false, editing: false },
   ]);
 
   function addTask(newTask) {
@@ -46,6 +46,12 @@ export default function ToDoListApp() {
     });
   }
 
+  function onToggleEdit(index) {
+    setTasks((tasks) => {
+      return toggleProperty(tasks, index, "editing");
+    });
+  }
+
   function getCompletedAmount() {
     return Object.values(tasks).reduce((a, task) => a + task.completed, 0);
   }
@@ -63,6 +69,7 @@ export default function ToDoListApp() {
         setTasks={setTasks}
         onToggleCompleted={onToggleCompleted}
         onToggleImportant={onToggleImportant}
+        onToggleEdit={onToggleEdit}
       />
     </div>
   );

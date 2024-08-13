@@ -9,7 +9,7 @@
   transition: 0.5s;
 }
 
-.move_button:hover {  
+.move_button:hover {
   cursor: pointer;
   color: white;
   background-color: #17a2b8;
@@ -64,4 +64,21 @@
   cursor: pointer;
   color: white;
   background-color: rgb(255, 174, 0);
+}
+
+.edit_button {
+  background-color: transparent;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  color: rgb(187, 0, 255);
+  border: 1px solid rgb(187, 0, 255);
+  transition: 0.5s;
+}
+
+.edit_button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(187, 0, 255);
 }

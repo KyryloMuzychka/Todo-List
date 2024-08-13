@@ -8,6 +8,7 @@ import {
   faAngleDown,
   faCheck,
   faExclamation,
+  faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import ManageButton from "../ManageButton/ManageButton";
 
@@ -19,6 +20,7 @@ export default function ToDoItem({
   onToggleImportant,
   moveTaskDown,
   moveTaskUp,
+  onToggleEdit,
 }) {
   const itemStyle = classNames({
     [styles.completed]: task.completed, // added if task.completed === true
@@ -46,14 +48,19 @@ export default function ToDoItem({
           icon={faAngleDown}
         />
         <ManageButton
-          typeButton={"completed_button"}
-          onClickButton={onToggleCompleted}
-          icon={faCheck}
-        />
-        <ManageButton
           typeButton={"important_button"}
           onClickButton={onToggleImportant}
           icon={faExclamation}
+        />
+        <ManageButton
+          typeButton={"edit_button"}
+          onClickButton={onToggleEdit}
+          icon={faPen}
+        />
+        <ManageButton
+          typeButton={"completed_button"}
+          onClickButton={onToggleCompleted}
+          icon={faCheck}
         />
       </div>
     </div>
