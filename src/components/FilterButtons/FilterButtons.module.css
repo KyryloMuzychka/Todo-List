@@ -1,0 +1,30 @@
+.filterButton {
+  background: transparent;
+  padding: 10px;
+  transition: 0.5s;
+  border: 1px solid #6c757d;
+  border-right: none;
+}
+
+.filterButton:nth-child(1) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.filterButton:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-right: 1px solid #6c757d;
+  ;
+}
+
+.filterButton:hover {
+  background-color: #6c757d;
+  color: #fff;
+  cursor: pointer;
+}
+
+.active {
+  color: #fff;
+  background-color: #17a2b8;
+}

@@ -16,8 +16,8 @@ export default function ToDoListApp() {
   const [filtering, setFiltering] = useState(false);
 
   function addTask(newTask) {
-    const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);    
-    const newId = maxId + 1;    
+    const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
+    const newId = maxId + 1;
     const newTaskWithId = { ...newTask, id: newId };
 
     if (newTask.title.trim() !== "") {
@@ -29,9 +29,9 @@ export default function ToDoListApp() {
   }
 
   function toggleProperty(tasksArray, id, key) {
-    return tasksArray.map(task => 
-      task.id === id ? {...task, [key]: !task[key]} : task
-    )    
+    return tasksArray.map((task) =>
+      task.id === id ? { ...task, [key]: !task[key] } : task
+    );
   }
 
   function onToggleCompleted(id) {
@@ -53,18 +53,25 @@ export default function ToDoListApp() {
   }
 
   function getCompletedAmount() {
-    return tasks.filter(task => task.completed).length;
+    return tasks.filter((task) => task.completed).length;
   }
 
-  function searchTasks(searchTitle) {    
+  function searchTasks(searchTitle, filterStatus) {
+    let filteredTasks = tasks;
+
+    if (filterStatus === "completed") {
+      filteredTasks = filteredTasks.filter((task) => task.completed);
+    } else if (filterStatus === "important") {
+      filteredTasks = filteredTasks.filter((task) => task.important);
+    }
+
     if (searchTitle.trim() !== "") {
-      const filteredTasks = tasks.filter((task) =>
+      filteredTasks = filteredTasks.filter((task) =>
         task.title.toLowerCase().includes(searchTitle.toLowerCase())
       );
-      setFilterTasks(filteredTasks);
-    } else {
-      setFilterTasks(tasks);
     }
+
+    setFilterTasks(filteredTasks);
   }
 
   useEffect(() => {
@@ -85,7 +92,11 @@ export default function ToDoListApp() {
         onToggleEdit={onToggleEdit}
         filtering={filtering}
       />
-      <SearchPanel searchTasks={searchTasks} tasks={tasks} setFiltering={setFiltering}/>
+      <SearchPanel
+        searchTasks={searchTasks}
+        tasks={tasks}
+        setFiltering={setFiltering}
+      />
     </div>
   );
 }

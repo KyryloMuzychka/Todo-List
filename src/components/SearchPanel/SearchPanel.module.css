@@ -1,12 +1,12 @@
 .search_panel {
   display: flex;
   gap: 3%;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 40px;
 }
 
 .search_item_input {
-  width: 82%;
+  width: 70%;
   height: 35px;
   font-size: 18px;
   border: 1px solid #9d9d9d;
