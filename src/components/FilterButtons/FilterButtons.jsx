@@ -7,6 +7,7 @@ export default function FilterButtons({ filterStatus, setFilterStatus }) {
     { status: "all", caption: "All" },
     { status: "important", caption: "Important" },
     { status: "completed", caption: "Done" },
+    { status: "todo", caption: "To Do" },
   ];
 
   return (

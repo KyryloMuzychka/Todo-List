@@ -63,6 +63,8 @@ export default function ToDoListApp() {
       filteredTasks = filteredTasks.filter((task) => task.completed);
     } else if (filterStatus === "important") {
       filteredTasks = filteredTasks.filter((task) => task.important);
+    } else if (filterStatus === "todo") {
+      filteredTasks = filteredTasks.filter((task) => !task.completed);
     }
 
     if (searchTitle.trim() !== "") {
