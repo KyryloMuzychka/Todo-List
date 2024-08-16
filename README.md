@@ -4,8 +4,6 @@ This is a React To-Do List application built with a focus on dynamic task manage
 
 ![To-Do List App Screenshot](docs/images/screenshot.png)
 
-***
-
 ## 🌟 Features
 
 - **Task Management:** Add, delete, edit, and update tasks with ease.
@@ -15,8 +13,6 @@ This is a React To-Do List application built with a focus on dynamic task manage
 - **Reordering:** Move tasks up and down the list.
 - **Persistent State:** Tasks are saved in `localStorage`, keeping your data intact across page reloads.
 
-***
-
 ## 🛠️ Usage
 
 - **Add a Task:** Type a task name in the input field and click "Add".
@@ -25,13 +21,9 @@ This is a React To-Do List application built with a focus on dynamic task manage
 - **Delete a Task:** Use the trash icon to remove a task.
 - **Reorder Tasks:** Use the up/down arrows to change task order. Completed tasks are automatically moved to the bottom of the list, while important tasks are moved to the top.
 
-***
-
 ## 📥 Saving and Reloading Tasks
 
 Tasks are automatically saved in `localStorage` and will be reloaded when you revisit or refresh the page.
-
-***
 
 ## 🧰 Project Structure
 
@@ -46,8 +38,6 @@ The application is composed of several React components that handle different pa
 - **ToDoItem:** Represents a single task and provides controls for task management.
 - **ToDoListApp:** The main container component that manages the state and renders other components.
 
-***
-
 ## 👨‍💻 Technologies Used
 
 ### Dependencies
@@ -60,8 +50,6 @@ The application is composed of several React components that handle different pa
 
 1. **Vite:** A fast development server and build tool for modern web projects.
 2. **Prettier:** A code formatter to ensure consistent code style.
-
-***
 
 ## 🚀 Getting Started
 
