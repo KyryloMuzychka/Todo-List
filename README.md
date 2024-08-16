@@ -2,7 +2,7 @@
 
 This is a React To-Do List application built with a focus on dynamic task management and user-friendly interaction. The application allows users to add, edit, delete, mark important, and complete tasks while offering powerful filtering and search options. The state is persisted locally using `localStorage`, ensuring that tasks remain intact even after refreshing the page.
 
-![To-Do List App Screenshot](docs/images/screenshot.png)
+![To-Do List App Screenshot](docs/images/screen.png)
 
 ## 🌟 Features
 
