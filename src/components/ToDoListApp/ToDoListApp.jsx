@@ -4,16 +4,22 @@ import Header from "../Header/Header";
 import AddItem from "../AddItem/AddItem";
 import ListItems from "../ListItems/ListItems";
 import SearchPanel from "../SearchPanel/SearchPanel";
+import {defaultTasks} from "../../defaultTasks"
 
 export default function ToDoListApp() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "1", completed: true, important: true, editing: false },
-    { id: 2, title: "2", completed: false, important: true, editing: false },
-    { id: 3, title: "3", completed: true, important: false, editing: false },
-    { id: 4, title: "4", completed: false, important: false, editing: false },
-  ]);
+  const savedTasks = localStorage.getItem("tasks");
+
+  const [tasks, setTasks] = useState(
+    savedTasks
+      ? JSON.parse(savedTasks)
+      : defaultTasks
+  );
   const [filterTasks, setFilterTasks] = useState([]);
   const [filtering, setFiltering] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function addTask(newTask) {
     const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
@@ -76,9 +82,24 @@ export default function ToDoListApp() {
     setFilterTasks(filteredTasks);
   }
 
+  function sortTasks() {
+    const sortedTasks = [...tasks].sort((a, b) => {
+      if (a.completed && !b.completed) return 1;
+      if (!a.completed && b.completed) return -1;
+      if (!a.important && b.important) return 1;
+      if (a.important && !b.important) return -1;
+      return 0;
+    });
+
+    if (JSON.stringify(sortedTasks) !== JSON.stringify(tasks)) {
+      setTasks(sortedTasks);
+    }
+  }
+
   useEffect(() => {
     getCompletedAmount;
     searchTasks;
+    sortTasks();
   }, [tasks]);
 
   return (
