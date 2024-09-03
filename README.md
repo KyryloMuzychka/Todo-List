@@ -62,8 +62,8 @@ Make sure you have Node.js and npm installed on your local machine.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/KyryloMuzychka/Todo-List.git
-    cd Todo-List
+    git clone https://github.com/muzychka20/to-do-list.git
+    cd to-do-list
     ```
 
 2. Install the dependencies:
